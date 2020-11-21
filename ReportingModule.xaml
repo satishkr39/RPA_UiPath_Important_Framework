@@ -1,0 +1,238 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ReportingModule" this:ReportingModule.in_OutputPath="C:\Users\ssing255\Documents\UiPath\ACMParkTestMeter\Data\Output" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ud="clr-namespace:UiPathTeam.DatatablesComparison;assembly=DataTablesComparison" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_OutputPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>754,3724</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ReportingModule_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="58">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPathTeam.DatatablesComparison</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>DataTablesComparison</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ReportingModule" sap:VirtualizedContainerService.HintSize="618,3659" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_ParkMeterLog" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_ParkedMeter" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Report" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FilterParkedMeter" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;SuccessMeter_&quot;+System.DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;)+&quot;.csv&quot;]" Name="SuccessMeters" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FailedMeter" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;FailedMeter_&quot;+System.DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;)+&quot;.csv&quot;]" Name="FailedMeters" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;ParkedMeter_&quot;+System.DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;)+&quot;.csv&quot;]" Name="ParkedMeter" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;ParkMeterLog_&quot;+System.DateTime.Now.ToString(&quot;dd-MM-yyyy&quot;)+&quot;.csv&quot;]" Name="ParkMeterLog" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ReportingModule.xaml started: &quot;+System.DateTime.Now.ToString]" />
+    <ui:BuildDataTable DataTable="[dt_FailedMeter]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="576,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Device_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dt_ParkMeterLog]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[in_OutputPath+&quot;\&quot;+ParkMeterLog]" sap:VirtualizedContainerService.HintSize="576,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dt_ParkedMeter]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[in_OutputPath+&quot;\&quot;+ParkedMeter]" sap:VirtualizedContainerService.HintSize="576,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
+    <ui:FilterDataTable DataTable="[dt_ParkedMeter]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="576,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_FilterParkedMeter]" SelectColumnsMode="Keep">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <InArgument x:TypeArguments="x:String">["Device ID"]</InArgument>
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <ud:DataTablesComparison Both="{x:Null}" RightOnly="{x:Null}" DisplayName="Data tables comparison" sap:VirtualizedContainerService.HintSize="576,22" sap2010:WorkflowViewState.IdRef="DataTablesComparison_1" Left="[dt_ParkMeterLog]" LeftOnly="[dt_Report]" Right="[dt_FilterParkedMeter]" />
+    <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_Report]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_OutputPath+&quot;\SuccessMeter\&quot;+SuccessMeters]" sap:VirtualizedContainerService.HintSize="576,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1" />
+    <ui:ClearDataTable DataTable="[dt_Report]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="576,22" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ParkedMeter]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="576,448" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,300" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[row.Item(&quot;Status&quot;).ToString=&quot;Succeeded.&quot; Or row.Item(&quot;Status&quot;).ToString.Contains(&quot;has been changed&quot;) Or row.Item(&quot;Status&quot;).ToString.Contains(&quot;has been connected&quot;)]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row.Item(0)}]" DataTable="[dt_Report]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+              </If.Then>
+              <If.Else>
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row.Item(0)}]" DataTable="[dt_FailedMeter]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachRow>
+    <ui:AppendCsvFile Encoding="{x:Null}" DataTable="[dt_Report]" Delimitator="Comma" DisplayName="Append to CSV" FilePath="[in_OutputPath+&quot;\SuccessMeter\&quot;+SuccessMeters]" sap:VirtualizedContainerService.HintSize="576,132" sap2010:WorkflowViewState.IdRef="AppendCsvFile_1" />
+    <ui:ClearDataTable DataTable="[dt_Report]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="576,22" sap2010:WorkflowViewState.IdRef="ClearDataTable_2" />
+    <Sequence DisplayName="Remove duplicate from success" sap:VirtualizedContainerService.HintSize="576,900" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dt_Report]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[in_OutputPath+&quot;\SuccessMeter\&quot;+SuccessMeters]" sap:VirtualizedContainerService.HintSize="354,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_3" />
+      <ui:RemoveDuplicateRows DataTable="[dt_Report]" DisplayName="Remove Duplicate Rows" sap:VirtualizedContainerService.HintSize="354,22" sap2010:WorkflowViewState.IdRef="RemoveDuplicateRows_1" OutputDataTable="[dt_Report]" />
+      <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Execution Time" DataTable="[dt_Report]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="354,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_Report]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="354,300" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[row.Item("Execution Time")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[System.DateTime.Now]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+      <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_Report]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_OutputPath+&quot;\SuccessMeter\&quot;+SuccessMeters]" sap:VirtualizedContainerService.HintSize="354,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_2" />
+    </Sequence>
+    <ui:FilterDataTable DataTable="[dt_FailedMeter]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="576,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dt_FailedMeter]" SelectColumnsMode="Keep">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+            <ui:FilterOperationArgument.Column>
+              <InArgument x:TypeArguments="x:String">["Device ID"]</InArgument>
+            </ui:FilterOperationArgument.Column>
+            <ui:FilterOperationArgument.Operand>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">["1	2"]</InArgument>
+            </ui:FilterOperationArgument.Operand>
+          </ui:FilterOperationArgument>
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <Sequence DisplayName="Add Execution Time" sap:VirtualizedContainerService.HintSize="576,646" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Execution Time" DataTable="[dt_FailedMeter]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="354,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_FailedMeter]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="354,300" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[row.Item("Execution Time")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[System.DateTime.Now]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+      <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_FailedMeter]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_OutputPath+&quot;\FailedMeter\&quot;+FailedMeters]" sap:VirtualizedContainerService.HintSize="354,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3" />
+    </Sequence>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;ReportingModule.xaml End: &quot;+System.DateTime.Now.ToString]" />
+  </Sequence>
+</Activity>

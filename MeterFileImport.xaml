@@ -1,0 +1,947 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="getData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_MeterID" Type="OutArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_meterFlag" Type="OutArgument(x:Boolean)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>833,10308</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>getData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="26">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.CV</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="48">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Meter Factory File" sap:VirtualizedContainerService.HintSize="843,10143" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="element_exist" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Modify Meter Factory File" sap:VirtualizedContainerService.HintSize="801,5375" sap2010:WorkflowViewState.IdRef="Sequence_140">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_ModifiedMeterData" />
+        <Variable x:TypeArguments="x:Int32" Default="[new Random().Next(101,99999)]" Name="CountUniqueValues" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_ExtractedMeterValues" />
+        <Variable x:TypeArguments="x:String" Name="ModifyMetervalue" />
+        <Variable x:TypeArguments="x:Int32" Default="0" Name="CountModifiedSerialNumber" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_CopiedMeterData" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_NewExtractedData" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dt_FinalMeterValues" />
+        <Variable x:TypeArguments="ui:GenericValue" Name="CountRow" />
+        <Variable x:TypeArguments="x:Int32" Name="Count" />
+        <Variable x:TypeArguments="x:String" Name="MeterTest" />
+        <Variable x:TypeArguments="x:Int32" Name="meterIDCount" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_Fact_new2.txt&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="613,157" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_Config(&quot;input_path&quot;).ToString+&quot;\Meter_Fact_new.txt&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CopyFile>
+      <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_Fact_new.csv&quot;]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="613,157" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_Fact_new2.txt&quot;]" />
+      <ui:ReadCsvFile Encoding="{x:Null}" sap2010:Annotation.AnnotationText="Read the meter factory file" DataTable="[dt_ModifiedMeterData]" Delimitator="Semicolon" DisplayName="Read CSV" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_Fact_new.csv&quot;]" sap:VirtualizedContainerService.HintSize="613,183" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ReadCsvFile>
+      <Assign DisplayName="Assign(Copy the original meter values)" sap:VirtualizedContainerService.HintSize="613,60" sap2010:WorkflowViewState.IdRef="Assign_52">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dt_CopiedMeterData]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dt_ModifiedMeterData.Copy]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:Annotation.AnnotationText="(Copy values from CopiedMeterData to NewExtractedData" DisplayName="Assign" sap:VirtualizedContainerService.HintSize="613,102" sap2010:WorkflowViewState.IdRef="Assign_53">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dt_NewExtractedData]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dt_ModifiedMeterData.Copy]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <ui:FilterDataTable DataTable="[dt_ModifiedMeterData]" DisplayName="Filter Data Table" sap:VirtualizedContainerService.HintSize="613,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dt_ModifiedMeterData]" SelectColumnsMode="Keep">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <InArgument x:TypeArguments="x:String">["EGENDOMSNUMMER"]</InArgument>
+            <InArgument x:TypeArguments="x:String">["TILLV_SERIENUMMER"]</InArgument>
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+      </ui:FilterDataTable>
+      <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_ModifiedMeterData]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\ModifiedOutputData.csv&quot;]" sap:VirtualizedContainerService.HintSize="613,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:WriteCsvFile>
+      <Assign DisplayName="Assign(to assign filtered meter values)" sap:VirtualizedContainerService.HintSize="613,60" sap2010:WorkflowViewState.IdRef="Assign_54">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dt_ExtractedMeterValues]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[dt_ModifiedMeterData.Copy]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="613,60" sap2010:WorkflowViewState.IdRef="Assign_71">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[meterIDCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ModifiedMeterData]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="613,2055" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="563,1907" sap2010:WorkflowViewState.IdRef="Sequence_136">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="MeterValue" />
+                <Variable x:TypeArguments="x:String" Name="MeterIdNumber" />
+                <Variable x:TypeArguments="x:String" Name="ModifiedMeterIdNumber" />
+                <Variable x:TypeArguments="ui:GenericValue" Name="SerialNoValue" />
+                <Variable x:TypeArguments="x:String" Name="SerialNumber" />
+                <Variable x:TypeArguments="x:String" Name="ModifiedSerialNumber" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="EGENDOMSNUMMER" DisplayName="Get Row Item(EGENDNOMSNUMMER)" sap:VirtualizedContainerService.HintSize="521,64" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+                <ui:GetRowItem.Value>
+                  <OutArgument x:TypeArguments="x:String">[MeterValue]</OutArgument>
+                </ui:GetRowItem.Value>
+              </ui:GetRowItem>
+              <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="TILLV_SERIENUMMER" DisplayName="Get Row Item(&quot;TILLV_SERIENUMMER&quot;)" sap:VirtualizedContainerService.HintSize="521,64" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
+                <ui:GetRowItem.Value>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[SerialNoValue]</OutArgument>
+                </ui:GetRowItem.Value>
+              </ui:GetRowItem>
+              <Assign DisplayName="Assign(for GENDNOMSNUMMER)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_55">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[MeterIdNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[MeterValue]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign(for TILLV_SERIENUMMER)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[SerialNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[SerialNoValue]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign(to assign substring of meter id)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_57">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[ModifiedMeterIdNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[MeterIdNumber.Substring(0,MeterIdNumber.Length()-4)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign(To concatenate)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_58">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[ModifyMetervalue]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[ModifiedMeterIdNumber+CountUniqueValues.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_59">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[ModifiedSerialNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[ModifiedMeterIdNumber+CountUniqueValues.ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign(to increment CountUniqueValue)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_60">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[CountUniqueValues]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[CountUniqueValues+1]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <If Condition="[meterIDCount=0]" sap:VirtualizedContainerService.HintSize="521,472" sap2010:WorkflowViewState.IdRef="If_14">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="376,324" sap2010:WorkflowViewState.IdRef="Sequence_141">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_70">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[out_MeterID]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[ModifyMetervalue]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:WriteTextFile DisplayName="Write Text File" FileName="[in_Config(&quot;output_path&quot;).ToString+&quot;\MeterID.txt&quot;]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[out_MeterID]" />
+                  </Sequence>
+                </If.Then>
+              </If>
+              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{}]" DataTable="[dt_ExtractedMeterValues]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="521,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+              <Assign sap2010:Annotation.AnnotationText="To add modified meter value in 1st row" sap:VirtualizedContainerService.HintSize="521,91" sap2010:WorkflowViewState.IdRef="Assign_61">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[dt_ExtractedMeterValues.Rows(CountModifiedSerialNumber).Item(0)]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[ModifyMetervalue]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <Assign sap2010:Annotation.AnnotationText="To add modified serial number value in 2nd row" sap:VirtualizedContainerService.HintSize="521,102" sap2010:WorkflowViewState.IdRef="Assign_62">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[dt_ExtractedMeterValues.Rows(CountModifiedSerialNumber).Item(1)]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[ModifiedSerialNumber]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <Assign DisplayName="Assign(to incerement counter)" sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_63">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[CountModifiedSerialNumber]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[CountModifiedSerialNumber+1]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="521,60" sap2010:WorkflowViewState.IdRef="Assign_72">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[meterIDCount]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[meterIDCount+1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEachRow>
+      <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" sap2010:Annotation.AnnotationText="Writing the meter values details in the given datatable" DataTable="[dt_ExtractedMeterValues]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\updatedFolder.csv&quot;]" sap:VirtualizedContainerService.HintSize="613,183" sap2010:WorkflowViewState.IdRef="WriteCsvFile_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:WriteCsvFile>
+      <ui:FilterDataTable DataTable="[dt_CopiedMeterData]" DisplayName="Filter Data Table" sap:VirtualizedContainerService.HintSize="613,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dt_FinalMeterValues]" SelectColumnsMode="Remove">
+        <ui:FilterDataTable.Filters>
+          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+            <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+          </scg:List>
+        </ui:FilterDataTable.Filters>
+        <ui:FilterDataTable.SelectColumns>
+          <scg:List x:TypeArguments="InArgument" Capacity="4">
+            <InArgument x:TypeArguments="x:String">["EGENDOMSNUMMER"]</InArgument>
+            <InArgument x:TypeArguments="x:String">["TILLV_SERIENUMMER"]</InArgument>
+          </scg:List>
+        </ui:FilterDataTable.SelectColumns>
+      </ui:FilterDataTable>
+      <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" ColumnName="EGENDOMSNUMMER" DataTable="[dt_FinalMeterValues]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="613,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" Unique="False" />
+      <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" ColumnName="TILLV_SERIENUMMER" DataTable="[dt_FinalMeterValues]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="613,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" Unique="False" />
+      <Assign sap:VirtualizedContainerService.HintSize="613,60" sap2010:WorkflowViewState.IdRef="Assign_64">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[CountRow]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[0]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_FinalMeterValues]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="613,51" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="618,1059" sap2010:WorkflowViewState.IdRef="Sequence_139">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="576,60" sap2010:WorkflowViewState.IdRef="Assign_65">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_ExtractedMeterValues]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="576,740" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="line" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,592" sap2010:WorkflowViewState.IdRef="Sequence_138">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[CountRow=Count And Count&lt;dt_ExtractedMeterValues.Rows.Count]" sap:VirtualizedContainerService.HintSize="484,400" sap2010:WorkflowViewState.IdRef="If_13">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_137">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_66">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Object">[row.Item("EGENDOMSNUMMER")]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Object">[line.Item("EGENDOMSNUMMER")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_67">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Object">[row.Item("TILLV_SERIENUMMER")]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Object">[line.Item("TILLV_SERIENUMMER")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                      <Assign DisplayName="Assign(to increment row count)" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_68">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">[Count+1]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ForEachRow>
+              <Assign sap2010:Annotation.AnnotationText="To increment row count for outer loop)" sap:VirtualizedContainerService.HintSize="576,87" sap2010:WorkflowViewState.IdRef="Assign_69">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[CountRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="ui:GenericValue">[CountRow+1]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEachRow>
+      <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dt_FinalMeterValues]" Delimitator="Comma" DisplayName="Write CSV" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_fact_new.csv&quot;]" sap:VirtualizedContainerService.HintSize="576,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:WriteCsvFile>
+      <ui:ClearDataTable DataTable="[dt_FinalMeterValues]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="576,22" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
+      <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dt_FinalMeterValues]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\Meter_fact_new.csv&quot;]" sap:VirtualizedContainerService.HintSize="576,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
+      <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="426,132" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="SetOrdinal">
+        <InvokeMethod.TargetObject>
+          <InArgument x:TypeArguments="sd:DataColumn">[dt_FinalMeterValues.Columns("EGENDOMSNUMMER")]</InArgument>
+        </InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="x:Int32">2</InArgument>
+      </InvokeMethod>
+      <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="426,132" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="SetOrdinal">
+        <InvokeMethod.TargetObject>
+          <InArgument x:TypeArguments="sd:DataColumn">[dt_FinalMeterValues.Columns("TILLV_SERIENUMMER")]</InArgument>
+        </InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="x:Int32">8</InArgument>
+      </InvokeMethod>
+      <ui:OutputDataTable DataTable="[dt_FinalMeterValues]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[MeterTest]" />
+      <ui:WriteCsvFile AddHeaders="True" DataTable="[dt_FinalMeterValues]" Delimitator="Semicolon" DisplayName="Write CSV" Encoding="us-ascii" FilePath="[in_Config(&quot;output_path&quot;).ToString+&quot;\MepCreate.csv&quot;]" sap:VirtualizedContainerService.HintSize="426,152" sap2010:WorkflowViewState.IdRef="WriteCsvFile_4" />
+      <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;output_path&quot;).ToString+&quot;\MepCreate.txt&quot;]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="576,157" sap2010:WorkflowViewState.IdRef="MoveFile_2" Overwrite="True" Path="[in_Config(&quot;output_path&quot;).ToString+&quot;\MepCreate.csv&quot;]" />
+    </Sequence>
+    <Sequence DisplayName="Sequence - Check status of meter file import" sap:VirtualizedContainerService.HintSize="801,1496" sap2010:WorkflowViewState.IdRef="Sequence_93">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="572,1404" sap2010:WorkflowViewState.IdRef="DoWhile_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <DoWhile.Condition>[element_exist = False]</DoWhile.Condition>
+        <Sequence sap:VirtualizedContainerService.HintSize="526,1242" sap2010:WorkflowViewState.IdRef="Sequence_92">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:UiElementExists DisplayName="Element Exists - Check SESP Exist" Exists="[element_exist]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2c0dab48-3b74-423d-86bc-95b23cb7ebbe" InformativeScreenshot="855a229e63bbbd5da3491c4feb1fd190" Selector="&lt;wnd app='java*.exe' cls='SunAwtFrame' omit:title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+          <If Condition="[element_exist]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_12">
+            <If.Else>
+              <Throw Exception="[New BusinessRuleException(&quot;SESP not open&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            </If.Else>
+          </If>
+          <Sequence DisplayName="Web" sap:VirtualizedContainerService.HintSize="484,756" sap2010:WorkflowViewState.IdRef="Sequence_110">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window - SESP " sap:VirtualizedContainerService.HintSize="435,664" sap2010:WorkflowViewState.IdRef="WindowScope_14" InformativeScreenshot="2e8f4116073b417a83b0cfb7a2668df0" Selector="&lt;wnd app='java*.exe' cls='SunAwtFrame' omit:title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;">
+              <ui:WindowScope.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="401,518" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Click DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="3000" DisplayName="Click 'menu  Tools'" sap:VirtualizedContainerService.HintSize="359,106" sap2010:WorkflowViewState.IdRef="Click_33" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="False">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition OffsetX="19" OffsetY="7" Position="TopLeft" />
+                      </ui:Click.CursorPosition>
+                      <ui:Click.SendWindowMessages>
+                        <InArgument x:TypeArguments="x:Boolean">
+                          <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_1" />
+                        </InArgument>
+                      </ui:Click.SendWindowMessages>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ba5e0703-1b71-4ab5-8f14-121c40802d90" InformativeScreenshot="aebc5064bffc2f4a49be337bad170082" Selector="&lt;java name='Tools' role='menu' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap:VirtualizedContainerService.HintSize="359,106" sap2010:WorkflowViewState.IdRef="Click_34" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition OffsetX="59" OffsetY="15" Position="TopLeft" />
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="78eb16f3-0525-460e-987d-879012fc13a3" InformativeScreenshot="441b990120bfc9aaffc805d79fda7530" Selector="&lt;java name='Tools' role='menu' /&gt;&lt;java name='Manual Import of File' role='menu item' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Select Item 'combo box'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="SelectItem_9" Item="Apparatfil Mätare/Modem/Terminal (Factory File Meter/Modem/Terminal)">
+                      <ui:SelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="8">
+                          <x:String>&lt;Not Selected&gt;</x:String>
+                          <x:String>Apparatfil Concentrator/Repeater (Factory File Concentrator/Repeater)</x:String>
+                          <x:String>Apparatfil Mätare/Modem/Terminal (Factory File Meter/Modem/Terminal)</x:String>
+                          <x:String>Apparatfil Transformator (Factory File Transformer)</x:String>
+                          <x:String>Import EON Kit (Import EON Kit)</x:String>
+                          <x:String>&lt;html&gt;Manual Import EON Service Meddelande (Import Eon Service Meddelande) &lt;font size=2 color='#909090'&gt;EON&lt;/font&gt;&lt;/html&gt;</x:String>
+                          <x:String>Manual Import Relacom Service Bilaga (Import Relacom Service Bilaga)</x:String>
+                          <x:String>Manual Import Relacom Service Meddelande (Import Relacom Service Meddelande)</x:String>
+                        </scg:List>
+                      </ui:SelectItem.Items>
+                      <ui:SelectItem.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="040d0417-016a-4773-b72a-669d26721146" InformativeScreenshot="032198099f5a45433c512dd2d4be3db7" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Manual Import of File' /&gt;&lt;java name='Import File' role='panel' /&gt;&lt;java role='combo box' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:SelectItem.Target>
+                    </ui:SelectItem>
+                  </Sequence>
+                </ActivityAction>
+              </ui:WindowScope.Body>
+            </ui:WindowScope>
+          </Sequence>
+        </Sequence>
+      </DoWhile>
+    </Sequence>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Browse'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3386187d-1d6a-46fa-b921-554d9dd5c59d" InformativeScreenshot="5cd6eef7b4987c889998e890c45e9795" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Manual Import of File' /&gt;&lt;java name='Import File' role='panel' /&gt;&lt;java name='Browse' role='push button' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into 'text  File Name:'" sap:VirtualizedContainerService.HintSize="801,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[in_Config(&quot;output_path&quot;).ToString+&quot;\mepcreate.txt&quot;]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e419f1a1-23d9-4661-a3e7-e7ba018dac54" InformativeScreenshot="444184679719de8488a7f94793f8a046" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Open' /&gt;&lt;java name='File Name:' role='text' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Open'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c5f8543b-1c6e-4b2b-84d8-0073467fb7d5" InformativeScreenshot="1df1dc29429aca491c6f1e893973196b" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Open' /&gt;&lt;java name='Open' role='push button' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'push button'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="34bfb2eb-65e2-4526-8b0b-00189f2e5865" InformativeScreenshot="ac92fb1e44b9a8e2d9182457fc9b38a6" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Manual Import of File' /&gt;&lt;java name='Start Import' role='push button' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="2000" DisplayName="Click 'push button  Yes'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ce4cb6df-57c4-4f00-a198-0eb697ef34ce" InformativeScreenshot="cd4c519628006cfd7002d4c704e361f7" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Manual Import of File' /&gt;&lt;java name='Yes' role='push button' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Open'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_26" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b4fe3604-100f-4432-9daa-a055b77a12e9" InformativeScreenshot="b2b172bf68d80d4782afcc02858dfbf3" Selector="&lt;wnd app='java*.exe' cls='SunAwtDialog' title='Entity Created' /&gt;&lt;java name='Open' role='push button' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:Click.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Click>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'page tab  Messages'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_35" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="03fd02fd-2354-4632-aa27-7dfa6c6291a6" InformativeScreenshot="c8d404250f7a1a277c8d6f707023d9a8" Selector="&lt;wnd app='javaw.exe' cls='SunAwtFrame' title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;&lt;java role='page tab list' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java name='Messages' role='page tab' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_DOUBLE" DisplayName="Double Click" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_36" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="11be8a53-012f-49fa-8854-1c611fd925aa" InformativeScreenshot="69a50bd7d0eab1ae3dd6f480afb767c7" Selector="&lt;wnd app='javaw.exe' cls='SunAwtFrame' title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;&lt;java role='page tab list' /&gt;&lt;java idx='1' role='page tab list' /&gt;&lt;java role='table' /&gt;&lt;java role='label' tableCol='3' tableRow='0' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'page tab  Messages'" sap:VirtualizedContainerService.HintSize="801,106" sap2010:WorkflowViewState.IdRef="Click_37" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a85fac8d-5f2b-462b-9ed8-6016a3c84b6d" InformativeScreenshot="e6a39b6115cb5017f6ce5d63e64a0948" Selector="&lt;wnd app='javaw.exe' cls='SunAwtFrame' title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;&lt;java role='page tab list' /&gt;&lt;java idx='2' role='page tab list' /&gt;&lt;java name='Overview' role='page tab' /&gt;&lt;java idx='4' name='Open' role='push button' /&gt;" WaitForReady="COMPLETE">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+        </ui:Target>
+      </ui:Click.Target>
+    </ui:Click>
+    <Delay Duration="00:00:20" sap:VirtualizedContainerService.HintSize="801,22" sap2010:WorkflowViewState.IdRef="Delay_12" />
+    <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'SESPlatfo Sunawtfra' - fetch status" sap:VirtualizedContainerService.HintSize="801,1696" sap2010:WorkflowViewState.IdRef="WindowScope_19" InformativeScreenshot="1a0b2ee2595a73af8a3c5d392479369e" Selector="&lt;wnd app='javaw.exe' cls='SunAwtFrame' omit:title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;">
+      <ui:WindowScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="767,1550" sap2010:WorkflowViewState.IdRef="Sequence_135">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ui:GenericValue" Name="rowCount" />
+              <Variable x:TypeArguments="x:Int32" Default="0" Name="checkFlag" />
+              <Variable x:TypeArguments="sd:DataTable" Name="ElinDataTable" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ElinDataTable]" DisplayName="Extract Structured Data 'table'" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest' /&gt;" sap:VirtualizedContainerService.HintSize="725,106" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="True">
+              <ui:ExtractData.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="69637cad-ec72-4ea6-a70c-96889d7f3102" InformativeScreenshot="5d8d2394f1669f2e91fc2a7ffc481a67" Selector="&lt;java role='page tab list' /&gt;&lt;java idx='3' role='page tab list' /&gt;&lt;java name='Overview' role='page tab' /&gt;&lt;java name='Case Overview' role='panel' /&gt;&lt;java role='table' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:ExtractData.Target>
+            </ui:ExtractData>
+            <Assign sap:VirtualizedContainerService.HintSize="725,60" sap2010:WorkflowViewState.IdRef="Assign_47">
+              <Assign.To>
+                <OutArgument x:TypeArguments="ui:GenericValue">[rowCount]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="ui:GenericValue">[ElinDataTable.Rows.Count]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[ElinDataTable.Rows(0).Item(&quot;Status&quot;).ToString = &quot;Closed&quot;]" sap:VirtualizedContainerService.HintSize="725,207" sap2010:WorkflowViewState.IdRef="If_9">
+              <If.Then>
+                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_48">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[checkFlag]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[checkFlag +1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+            </If>
+            <If Condition="[ElinDataTable.Rows(rowCount-1).Item(&quot;Status&quot;).ToString = &quot;Imported&quot;]" sap:VirtualizedContainerService.HintSize="725,207" sap2010:WorkflowViewState.IdRef="If_10">
+              <If.Then>
+                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_49">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[checkFlag]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[checkFlag+1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+            </If>
+            <If Condition="[checkFlag = 2]" sap:VirtualizedContainerService.HintSize="725,426" sap2010:WorkflowViewState.IdRef="If_11">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_133">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_51">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[out_meterFlag]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,279" sap2010:WorkflowViewState.IdRef="Sequence_134">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\SendFailMail.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Body">Unable to import Meter</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Subject">[in_Config("subject").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_MailID">[in_Config("mailID").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_ErrorMessage" />
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_50">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[out_meterFlag]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'menu  Window'" sap:VirtualizedContainerService.HintSize="725,106" sap2010:WorkflowViewState.IdRef="Click_40" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5b6fd1b9-3eea-442f-be11-367e9295cc03" InformativeScreenshot="64c476cbf62f0f98bc747da4a8050939" Selector="&lt;wnd app='javaw.exe' cls='SunAwtFrame' title='SES Platform Client (EON Edition) [Paris Cloud Test A (eon1tepcl*' /&gt;&lt;java name='Window' role='menu' /&gt;" WaitForReady="COMPLETE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item' - Close Entity" sap:VirtualizedContainerService.HintSize="725,106" sap2010:WorkflowViewState.IdRef="Click_41" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="cba80d5d-5619-45fa-b12e-59343d208963" InformativeScreenshot="66997e63d2c6b68eaa050fbf29d6e0ff" Selector="&lt;java name='Window' role='menu' /&gt;&lt;java name='Close All Entities' role='menu item' /&gt;" WaitForReady="COMPLETE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+          </Sequence>
+        </ActivityAction>
+      </ui:WindowScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:WindowScope>
+  </Sequence>
+</Activity>
